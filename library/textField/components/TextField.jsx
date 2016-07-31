@@ -42,6 +42,11 @@ const TextField = React.createClass({
     handleInput: function(evt) {
         this.setState(Object.assign({}, this.state, {invalid:!evt.target.validity.valid, value:evt.target.value}));
     },
+    componentDidMount:function(){
+        if (this.props.autofocus){
+            document.getElementById(this.state.id).focus();
+        }
+    },
     render: function() {
         return (
             <div ref={this.handleRefs} className={getClasses.bind(this)()}>
