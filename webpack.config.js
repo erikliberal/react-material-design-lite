@@ -1,4 +1,4 @@
-module.exports={
+module.exports=[{
   context: __dirname + "/library",
   entry: {mdl:"./mdl"},
   output: {
@@ -7,10 +7,14 @@ module.exports={
       libraryTarget:"umd",
       library:"[name]"
   },
+  target:"web",
+  module:{
+      loaders:[
+          {test:/\.jsx$/, loader:"babel-loader"}
+      ]
+  },
   externals:[
     {"React":"React"},
     {"ReactDOM":"ReactDOM"}
   ]
-}, ()=>{
-  console.log('Done packing ', arguments.length);
-};
+}];

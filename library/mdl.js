@@ -1,3 +1,3 @@
 module.exports={
-  "TextField":require("./textField/components/TextField")
+  "TextField":require("./textField/components/TextField.jsx")
 };

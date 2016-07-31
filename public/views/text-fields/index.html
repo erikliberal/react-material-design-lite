@@ -10,6 +10,10 @@
     <div style="margin:1em;">
 
       <form id="form1" action="#">
+          <div id="input1">
+          </div>
+          <div id="input2">
+          </div>
       </form>
       <!-- Numeric Textfield with Floating Label -->
       <form action="#">
@@ -27,7 +31,13 @@
           label:'Texto aqui',
           autofocus:true,
           floatingLabel:true
-        }), document.getElementById("form1"));
+      }), document.getElementById("input1"));
+        ReactDOM.render(React.createElement(mdl.TextField,{
+          label:'Texto aqui',
+          autofocus:true,
+          floatingLabel:true,
+          pattern:"-?[0-9]*(\.[0-9]+)?"
+      }), document.getElementById("input2"));
       })();
     </script>
   </body>
