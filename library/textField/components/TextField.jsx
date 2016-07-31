@@ -50,8 +50,8 @@ const TextField = React.createClass({
     },
     render: function() {
         return (
-            <div ref={this.handleRefs} className={getClasses.bind(this)()}>
-                <TextFieldInput id={this.state.id} pattern={this.props.pattern} autofocus={this.props.autofocus} onFocus={this.handleFocus} onBlur={this.handleBlur} onInput={this.handleInput} />
+            <div ref={this.handleRefs} className={getClasses.bind(this)()} style={this.props.style}>
+                <TextFieldInput id={this.state.id} pattern={this.props.pattern} autofocus={this.props.autofocus} onFocus={this.handleFocus} onBlur={this.handleBlur} onInput={this.handleInput} rows={this.props.rows}/>
                 <TextFieldLabel for={this.state.id} label={this.props.label || ''} />
                 <TextFieldError>{this.props.invalidPatternMessage}</TextFieldError>
             </div>
