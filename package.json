@@ -1,0 +1,73 @@
+{
+  "name": "material-design-react",
+  "version": "0.0.1-SNAPSHOT",
+  "description": "",
+  "main": "index.js",
+  "config": {
+    "less": {
+      "includePaths": "node_modules/normalize-css"
+    },
+    "css": {
+      "includePaths": "node_modules/normalize-css",
+      "build": {
+        "include": "stylesheets/standard.less",
+        "fileName": "standard.css",
+        "outputFolder": "public/resources/css"
+      },
+      "deploy": {
+        "include": "stylesheets/standard.less",
+        "fileName": "standard.css",
+        "outputFolder": "public/deploy/css"
+      }
+    },
+    "js": {
+      "vendor": {
+        "build": {
+          "include": "node_modules/react/dist/react.js node_modules/react-dom/dist/react-dom.js",
+          "outputFolder": "public/resources/js"
+        },
+        "deploy": {
+          "include": "node_modules/react/dist/react.min.js node_modules/react-dom/dist/react-dom.min.js",
+          "outputFolder": "public/deploy/js"
+        }
+      },
+      "output": {
+        "folder": "public/resources/js"
+      }
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf public/*",
+    "build:css": "lessc --source-map --include-path=\"${npm_package_config_css_includePaths}\" ${npm_package_config_css_build_include} ${npm_package_config_css_build_outputFolder}/${npm_package_config_css_build_fileName}",
+    "build:js:vendor": "mkdir -p \"${npm_package_config_js_vendor_build_outputFolder}\" && cp -u ${npm_package_config_js_vendor_build_include} \"${npm_package_config_js_vendor_build_outputFolder}\"",
+    "build:js": "webpack",
+    "build": "npm run build:js:vendor && npm run build:js && npm run build:css",
+    "watch:css": "forever start -a -l output.log node_modules/watch/cli.js 'npm run build:css' stylesheets --ignoreDotFiles --ignoreUnreadable",
+    "watch:js": "forever start -a -l output.log node_modules/webpack/bin/webpack.js --watch",
+    "watch:browser-sync": "forever start -a -l output.log node_modules/browser-sync/bin/browser-sync.js start -s public -f public",
+    "prewatch": "forever stopall && forever cleanlogs",
+    "watch": "npm run watch:css && npm run watch:js && npm run watch:browser-sync",
+    "deploy:js:vendor": "mkdir -p \"${npm_package_config_js_vendor_deploy_outputFolder}\" && cp -u ${npm_package_config_js_vendor_deploy_include} \"${npm_package_config_js_vendor_deploy_outputFolder}\"",
+    "deploy:css": "lessc --include-path=${npm_package_config_css_includePaths} ${npm_package_config_css_deploy_include} ${npm_package_config_css_deploy_outputFolder}/${npm_package_config_css_deploy_fileName}",
+    "deploy": "npm run deploy:js:vendor && npm run deploy:css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "forever": "0.15.x",
+    "js-beautify": "1.6.x",
+    "jshint": "2.9.x",
+    "less": "2.7.x",
+    "material-design-lite": "1.1.x",
+    "webpack": "1.13.x",
+    "watch": "0.18.x"
+  },
+  "dependencies": {
+    "alt": "0.18.x",
+    "normalize-css": "2.3.x",
+    "react": "15.1.x",
+    "react-dom": "15.1.x"
+  }
+}
